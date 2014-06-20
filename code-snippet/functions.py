@@ -13,6 +13,14 @@ def md5(s):
     m.update(s)
     return m.hexdigest()
 
+def mkdir_p(path):
+    try:
+        os.makedirs(path)
+    except OSError as exc: # Python >2.5
+        if exc.errno == errno.EEXIST and os.path.isdir(path):
+            pass
+        else: raise
+
 def chunklist(target, num):
     def _chunks(l, n):
         """ Yield successive n-sized chunks from l.
